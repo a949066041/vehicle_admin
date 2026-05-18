@@ -17,10 +17,12 @@ const { dataList: exams } = useExamInfoStore()
 const { list: reviews } = useDrivingReviewStore()
 
 const topCoaches = computed(() =>
-  [...coaches.value].sort((a, b) => b.click_num - a.click_num).slice(0, 6),
+  [...coaches.value].sort((a, b) => Number(b.click_num ?? 0) - Number(a.click_num ?? 0)).slice(0, 6),
 )
 
-function coachAvgStar(coachId: number) {
+function coachAvgStar(coachId: number | undefined) {
+  if (coachId == null)
+    return 0
   const list = reviews.value.filter(r => r.coach_id === coachId && r.student_star > 0)
   if (!list.length)
     return 0
@@ -32,6 +34,7 @@ const shortcuts = [
   { to: '/h5/coaches', label: '教练', icon: 'icon-[icon-park-outline--peoples]', desc: '教龄·评价' },
   { to: '/h5/sites', label: '场地', icon: 'icon-[icon-park-outline--local]', desc: '地图' },
   { to: '/h5/exam', label: '考试', icon: 'icon-[icon-park-outline--notebook-one]', desc: '申请' },
+  { to: '/h5/pay', label: '支付', icon: 'icon-[icon-park-outline--wallet]', desc: '费用缴纳' },
   { to: '/h5/vehicles', label: '车辆', icon: 'icon-[icon-park-outline--car]', desc: '空闲' },
   { to: '/h5/teaching', label: '学习', icon: 'icon-[icon-park-outline--book-open]', desc: '资料' },
 ] as const
@@ -125,7 +128,7 @@ const shortcuts = [
           v-else
           class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-base font-bold text-[#07c160]"
         >
-          {{ c.name.slice(0, 1) }}
+          {{ (c.name || '-').slice(0, 1) }}
         </div>
         <div class="mt-2 truncate text-xs font-medium text-slate-900">
           {{ c.name }}
@@ -213,7 +216,7 @@ const shortcuts = [
             {{ e.exam_name }}
           </div>
           <div class="mt-0.5 text-xs text-slate-600">
-            {{ e.exam_date }} · 余 {{ Math.max(0, e.max_num - e.booked_num) }} 席
+            {{ e.exam_date }} · 余 {{ Math.max(0, Number(e.max_num ?? 0) - Number(e.booked_num ?? 0)) }} 席
           </div>
         </div>
         <span class="rounded-full bg-[#07c160] px-2.5 py-1 text-[11px] text-white">

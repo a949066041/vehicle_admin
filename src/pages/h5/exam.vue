@@ -4,36 +4,40 @@ import { useExamApplyStore, useExamInfoStore, useLoginStore } from '~/store'
 
 const message = useMessage()
 const { dataList: exams } = useExamInfoStore()
-const { list: applies, applyExam } = useExamApplyStore()
+const { list: applies } = useExamApplyStore()
 const { currentProfile } = useLoginStore()
+const router = useRouter()
 
-function apply(eid: number) {
+function apply(eid: number | undefined) {
+  if (eid == null) {
+    message.error('考试信息异常，请刷新后重试')
+    return
+  }
   const sid = currentProfile.value?.id
   if (sid == null) {
     message.error('请先登录')
     return
   }
-  const res = applyExam({ student_id: sid, exam_id: eid })
-  if (!res.ok) {
-    message.error(res.message)
-    return
-  }
-  message.success('考试申请提交成功')
+  router.push({ path: '/h5/exam-confirm', query: { examId: String(eid) } })
 }
 
 const myApplies = computed(() => {
   const sid = currentProfile.value?.id
   if (sid == null)
     return []
-  return [...applies.value].filter(a => a.student_id === sid).sort((a, b) => b.id - a.id)
+  return [...applies.value]
+    .filter(a => a.student_id === sid)
+    .sort((a, b) => Number(b.id ?? 0) - Number(a.id ?? 0))
 })
 
-function appliedFor(eid: number) {
+function appliedFor(eid: number | undefined) {
+  if (eid == null)
+    return null
   return myApplies.value.find(a => a.exam_id === eid && (a.status === '待审核' || a.status === '已通过'))
 }
 
 function seatsLeft(e: (typeof exams.value)[0]) {
-  return Math.max(0, e.max_num - e.booked_num)
+  return Math.max(0, Number(e.max_num ?? 0) - Number(e.booked_num ?? 0))
 }
 </script>
 

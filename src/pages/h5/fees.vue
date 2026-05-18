@@ -4,6 +4,7 @@ import { useMessage } from 'naive-ui'
 import { useFeeStore, useLoginStore } from '~/store'
 
 const message = useMessage()
+const router = useRouter()
 const { currentProfile } = useLoginStore()
 const { dataList, updateData } = useFeeStore()
 
@@ -28,7 +29,7 @@ function pay(row: (typeof dataList.value)[0]) {
     pay_time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
     invoice: `INV-${dayjs().format('YYYYMMDDHHmmss')}`,
   })
-  message.success('支付成功（演示：模拟微信支付回调）')
+  router.push({ path: '/h5/pay-success', query: { feeId: String(row.id) } })
 }
 
 function copyInvoice(inv: string) {

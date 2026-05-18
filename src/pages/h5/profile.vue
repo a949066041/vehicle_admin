@@ -62,7 +62,7 @@ function out() {
 const menu = [
   { to: '/h5/my-bookings', label: '我的练车预约', icon: 'icon-[icon-park-outline--calendar]', sub: '记录与状态' },
   { to: '/h5/exam', label: '考试申请', icon: 'icon-[icon-park-outline--notebook-one]', sub: '名额与审核' },
-  { to: '/h5/fees', label: '支付费用', icon: 'icon-[icon-park-outline--wallet]', sub: '微信缴费·凭证' },
+  { to: '/h5/pay', label: '支付费用', icon: 'icon-[icon-park-outline--wallet]', sub: '微信缴费·凭证' },
   { to: '/h5/review', label: '评价教练', icon: 'icon-[icon-park-outline--star]', sub: '双向评价' },
   { to: '/h5/messages', label: '消息与联系', icon: 'icon-[icon-park-outline--message]', sub: '教练会话' },
   { to: '/h5/ai', label: 'AI 咨询', icon: 'icon-[icon-park-outline--robot]', sub: '智能问答' },
@@ -112,9 +112,6 @@ const pendingReview = computed(() => {
         <div class="mt-0.5 text-sm text-slate-500">
           {{ currentProfile?.username }}
         </div>
-        <p class="mt-2 text-xs text-slate-400">
-          个人信息维护可在「管理端-学员管理」中演示编辑。
-        </p>
       </div>
     </div>
 

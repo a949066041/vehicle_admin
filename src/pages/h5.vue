@@ -25,11 +25,11 @@ const active = computed(() => {
   }
   if (p.startsWith('/h5/book') || p.startsWith('/h5/coach') || p.startsWith('/h5/coaches') || p.startsWith('/h5/sites'))
     return '/h5/book'
-  if (p.startsWith('/h5/exam'))
+  if (p.startsWith('/h5/exam') || p.startsWith('/h5/exam-success'))
     return '/h5/exam'
   if (p.startsWith('/h5/messages') || p.startsWith('/h5/ai'))
     return '/h5/messages'
-  if (p.startsWith('/h5/profile') || p.startsWith('/h5/fees') || p.startsWith('/h5/review') || p.startsWith('/h5/my-bookings'))
+  if (p.startsWith('/h5/profile') || p.startsWith('/h5/pay') || p.startsWith('/h5/pay-success') || p.startsWith('/h5/fees') || p.startsWith('/h5/review') || p.startsWith('/h5/my-bookings'))
     return '/h5/profile'
   return ''
 })
