@@ -1,0 +1,21 @@
+src/pages/h5/messages.vue
+  s_348f54d634fbcf::t_ecf6fc00c6ebdf 43
+src/setup/auth.setup.ts
+  s_348f54d634fbcf::t_b0784a452997a5 31-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "e90d0eaa573e33c4db5e60eb1588b30ba1704eb6",
+  "prompts": {},
+  "sessions": {
+    "s_348f54d634fbcf": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "e7183f8e-0b96-44fe-a5d5-6ec05cd0d82d",
+        "model": "composer-2"
+      },
+      "human_author": "a949066041 <949066041@qq.com>"
+    }
+  }
+}
