@@ -16,9 +16,6 @@ function mapHref(s: (typeof dataList.value)[0]) {
 
 <template>
   <div class="space-y-3">
-    <p class="rounded-lg bg-white px-3 py-2 text-[13px] leading-relaxed text-slate-600 shadow-sm">
-      论文图5.7：场地信息与腾讯地图定位；点击下方按钮在地图 App 中查看精确位置。
-    </p>
     <div
       v-for="s in dataList"
       :key="s.id"

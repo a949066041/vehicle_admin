@@ -42,9 +42,6 @@ function book(p: (typeof projects.value)[0]) {
 
 <template>
   <div class="space-y-3">
-    <p class="rounded-lg bg-white px-3 py-2 text-[13px] leading-relaxed text-slate-600 shadow-sm">
-      论文图5.4–5.5：可预约与不可预约分开展示；同一时段不可重复预约；提交后状态为「待审核」。
-    </p>
     <n-input v-model:value="remark" type="textarea" placeholder="备注（可选）" :rows="2" class="rounded-xl" />
 
     <div class="flex items-center justify-between px-1">

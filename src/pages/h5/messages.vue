@@ -40,7 +40,7 @@ const threads = computed(() => {
           AI 智能咨询
         </div>
         <div class="truncate text-xs text-slate-500">
-          论文图5.11 · 驾考与练车常见问题
+          驾考与练车常见问题
         </div>
       </div>
       <span class="icon-[icon-park-outline--right] text-slate-300" />
@@ -49,9 +49,6 @@ const threads = computed(() => {
     <h2 class="px-1 text-[15px] font-semibold text-slate-900">
       联系教练
     </h2>
-    <p class="px-1 text-xs text-slate-500">
-      论文图5.12：与教练即时沟通，可从教练详情页发起留言。
-    </p>
     <RouterLink
       v-for="t in threads"
       :key="t.peerId"

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { useMessage } from 'naive-ui'
+import { useRoute, useRouter } from 'vue-router'
 import { useCoachStore, useDrivingReviewStore, useLoginStore } from '~/store'
 
 const message = useMessage()
+const router = useRouter()
+const route = useRoute()
 const { currentProfile } = useLoginStore()
 const { dataList: coaches } = useCoachStore()
 const { list, upsertStudentReview } = useDrivingReviewStore()
@@ -20,7 +23,12 @@ const existing = computed(() => {
 
 function submit() {
   const sid = currentProfile.value?.id
-  if (sid == null || coachId.value == null) {
+  if (sid == null) {
+    message.error('登录已失效，请重新登录')
+    router.push({ path: '/login', query: { redirect: route.fullPath } })
+    return
+  }
+  if (coachId.value == null) {
     message.error('请选择教练')
     return
   }
@@ -38,9 +46,6 @@ const coachName = computed(() => coaches.value.find(c => c.id === coachId.value)
 
 <template>
   <div class="space-y-4">
-    <p class="rounded-lg bg-white px-3 py-2 text-[13px] leading-relaxed text-slate-600 shadow-sm">
-      论文图5.15：学员对教练星级与文字评价；可查看教练对学员的评价与双方回复。
-    </p>
     <n-select
       v-model:value="coachId"
       :options="coaches.map(c => ({ label: c.name, value: c.id }))"

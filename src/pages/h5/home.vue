@@ -16,7 +16,6 @@ const { dataList: sites } = useSiteStore()
 const { dataList: exams } = useExamInfoStore()
 const { list: reviews } = useDrivingReviewStore()
 
-/** 论文图5.6：按点击量排序的教练推荐 */
 const topCoaches = computed(() =>
   [...coaches.value].sort((a, b) => b.click_num - a.click_num).slice(0, 6),
 )

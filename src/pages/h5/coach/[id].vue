@@ -75,9 +75,6 @@ function sendMsg() {
       <h2 class="text-[15px] font-semibold text-slate-900">
         学员评价
       </h2>
-      <p class="mt-1 text-xs text-slate-400">
-        论文图5.6：查看他人对教练的评价
-      </p>
       <div v-for="r in publicReviews" :key="r.id" class="mt-3 border-t border-slate-100 pt-3 first:mt-2 first:border-t-0 first:pt-0">
         <div class="text-amber-600">
           ★ {{ r.student_star }}
@@ -93,9 +90,6 @@ function sendMsg() {
       <h2 class="text-[15px] font-semibold text-slate-900">
         联系教练
       </h2>
-      <p class="mt-1 text-xs text-slate-400">
-        论文图5.12：即时留言
-      </p>
       <n-input v-model:value="text" class="mt-3" type="textarea" placeholder="给教练留言" :rows="3" />
       <n-button class="mt-3" type="primary" block @click="sendMsg">
         发送

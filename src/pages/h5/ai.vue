@@ -24,9 +24,6 @@ function send() {
 
 <template>
   <div class="flex min-h-[calc(100dvh-12rem)] flex-col rounded-xl bg-[#f5f5f5]">
-    <p class="mb-2 px-1 text-center text-[11px] text-slate-400">
-      论文图5.11 · 演示为本地规则回复（可对接百度 UNIT 等）
-    </p>
     <div class="flex-1 space-y-3 overflow-y-auto px-2 py-2">
       <template v-if="!turns.length">
         <div class="mx-auto mt-6 max-w-[85%] rounded-lg bg-white px-3 py-2 text-center text-xs text-slate-500 shadow-sm">

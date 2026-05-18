@@ -46,9 +46,6 @@ function avgStar(coachId: number) {
         ]"
       />
     </div>
-    <p class="text-xs text-slate-500">
-      论文图5.6：查看教龄、简介；支持排序与历史评价参考。
-    </p>
     <RouterLink
       v-for="c in sortedList"
       :key="c.id"

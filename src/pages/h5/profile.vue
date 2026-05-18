@@ -132,9 +132,6 @@ const pendingReview = computed(() => {
     </div>
 
     <n-card title="取消预约" size="small" embedded class="!rounded-xl">
-      <p class="mb-2 text-[12px] leading-relaxed text-slate-500">
-        论文图5.14：填写原因后提交，可随时查看处理状态。
-      </p>
       <n-input v-model:value="reason" type="textarea" placeholder="取消原因" :rows="2" />
       <div v-for="b in mine.filter(x => x.status === '已通过')" :key="b.id" class="mt-3 flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
         <span class="text-sm text-slate-700">{{ projectLabel(b.project_id) }}</span>

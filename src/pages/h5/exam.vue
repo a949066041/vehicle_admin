@@ -39,9 +39,6 @@ function seatsLeft(e: (typeof exams.value)[0]) {
 
 <template>
   <div class="space-y-3">
-    <p class="rounded-lg bg-white px-3 py-2 text-[13px] leading-relaxed text-slate-600 shadow-sm">
-      论文图5.8–5.10：名额不足、重复申请与提交成功提示；管理员预设可约人数。
-    </p>
     <div
       v-for="e in exams"
       :key="e.id"

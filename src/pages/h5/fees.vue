@@ -44,9 +44,6 @@ function copyInvoice(inv: string) {
 
 <template>
   <div class="space-y-3">
-    <p class="rounded-lg bg-white px-3 py-2 text-[13px] leading-relaxed text-slate-600 shadow-sm">
-      论文图5.13：待支付 / 已支付与发票凭证；真实环境将调起微信支付 JSAPI。
-    </p>
     <div
       v-for="f in mine"
       :key="f.id"

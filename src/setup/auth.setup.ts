@@ -28,6 +28,11 @@ export function authSetup(router: Router) {
         next({ path: '/back' })
         return
       }
+      if (!login.currentProfile.value) {
+        login.logout()
+        next({ path: '/login', query: { redirect: to.fullPath } })
+        return
+      }
     }
 
     if (to.path.startsWith('/back')) {
