@@ -42,7 +42,7 @@ const initData: Coach[] = [
     id: 3,
     username: 'coach005',
     password: '123456',
-    name: '王娇娇',
+    name: '王卫国',
     phone: '13823888886',
     gender: '女',
     age: 29,

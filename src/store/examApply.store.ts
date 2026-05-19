@@ -7,7 +7,7 @@ import { useExamInfoStore } from './examInfo.store'
 
 export const useExamApplyStore = createGlobalState(() => {
   const list = useLocalStorage<ExamApply[]>(
-    'driving-school-exam-applies-v2',
+    'driving-school-exam-applies-v3',
     () => seedExamApplies.map(r => ({ ...r })),
   )
 
@@ -38,7 +38,6 @@ export const useExamApplyStore = createGlobalState(() => {
       addtime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
     }
     list.value = [...list.value, row]
-    updateExam(ei, { ...ex, booked_num: ex.booked_num + 1 })
     return { ok: true, message: '考试申请提交成功', apply: row }
   }
 
@@ -47,18 +46,46 @@ export const useExamApplyStore = createGlobalState(() => {
     if (i < 0)
       return false
     const a = list.value[i]!
+    const prev = a.status
     list.value[i] = { ...a, status, check_remark: check_remark ?? a.check_remark }
     list.value = [...list.value]
-    if (status === '已驳回') {
-      const { dataList: exams, updateData: updateExam } = useExamInfoStore()
-      const ei = exams.value.findIndex(e => e.id === a.exam_id)
-      if (ei >= 0) {
-        const ex = exams.value[ei]!
-        updateExam(ei, { ...ex, booked_num: Math.max(0, ex.booked_num - 1) })
-      }
+
+    const { dataList: exams, updateData: updateExam } = useExamInfoStore()
+    const ei = exams.value.findIndex(e => e.id === a.exam_id)
+    if (ei < 0)
+      return true
+    const ex = exams.value[ei]!
+
+    if (status === '已通过' && prev !== '已通过') {
+      updateExam(ei, {
+        ...ex,
+        booked_num: ex.booked_num + 1,
+        status: ex.booked_num + 1 >= ex.max_num ? '已满' : ex.status,
+      })
+    }
+    if (status === '已驳回' && prev === '已通过') {
+      updateExam(ei, {
+        ...ex,
+        booked_num: Math.max(0, ex.booked_num - 1),
+        status: '可预约',
+      })
     }
     return true
   }
 
-  return { list, applyExam, setApplyStatus }
+  function updateApply(id: number, patch: Partial<ExamApply>) {
+    const i = list.value.findIndex(a => a.id === id)
+    if (i < 0)
+      return false
+    list.value[i] = { ...list.value[i]!, ...patch }
+    list.value = [...list.value]
+    return true
+  }
+
+  function removeApplies(ids: number[]) {
+    const set = new Set(ids)
+    list.value = list.value.filter(x => !set.has(x.id))
+  }
+
+  return { list, applyExam, setApplyStatus, updateApply, removeApplies }
 })

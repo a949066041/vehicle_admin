@@ -7,7 +7,7 @@ import { usePracticeBookingStore } from './practiceBooking.store'
 
 export const useCancelBookingStore = createGlobalState(() => {
   const list = useLocalStorage<CancelBookingRequest[]>(
-    'driving-school-cancel-bookings-v3',
+    'driving-school-cancel-bookings-v4',
     () => seedCancelBookings.map(r => ({ ...r })),
   )
 
@@ -43,10 +43,15 @@ export const useCancelBookingStore = createGlobalState(() => {
     list.value = [...list.value]
     if (status === '已通过') {
       const { setStatus: setBookingStatus } = usePracticeBookingStore()
-      setBookingStatus(cur.appoint_id, '已取消')
+      setBookingStatus(cur.appoint_id, '已取消', check_remark)
     }
     return true
   }
 
-  return { list, submitCancel, setStatus, cancelForAppoint }
+  function removeCancels(ids: number[]) {
+    const set = new Set(ids)
+    list.value = list.value.filter(x => !set.has(x.id))
+  }
+
+  return { list, submitCancel, setStatus, cancelForAppoint, removeCancels }
 })

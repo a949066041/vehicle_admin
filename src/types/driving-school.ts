@@ -97,10 +97,12 @@ export interface Site {
 export interface TrainingProject {
   id: number
   project_name: string
+  /** 练车科目，如科二、科三 */
   subject: string
   car_type: string
   site_id: number
   coach_id: number
+  car_id?: number
   train_date: string
   train_time: string
   /** 可约人数 */
@@ -108,6 +110,11 @@ export interface TrainingProject {
   booked_num: number
   /** 可预约 / 已满 / 已结束 */
   status: string
+  /** 预约状态：已预约 / 可预约 */
+  book_status?: string
+  practice_photo?: string
+  comment_num?: number
+  favorite_num?: number
   addtime?: string
 }
 
@@ -120,7 +127,10 @@ export interface PracticeBooking {
   appoint_date: string
   /** 待审核 / 已通过 / 已驳回 / 已取消 */
   status: string
+  /** 预约说明 */
   remark: string
+  /** 审核回复 */
+  check_remark?: string
   addtime?: string
 }
 
@@ -136,6 +146,7 @@ export interface ExamInfo {
   booked_num: number
   /** 可预约 / 已满 */
   status: string
+  exam_photo?: string
   addtime?: string
 }
 
@@ -200,6 +211,8 @@ export interface DrivingReview {
   coach_comment: string
   student_reply: string
   coach_reply: string
+  /** 练车车型展示 */
+  car_type?: string
   addtime?: string
 }
 

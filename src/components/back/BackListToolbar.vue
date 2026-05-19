@@ -1,4 +1,10 @@
 <script lang="ts" setup>
+withDefaults(defineProps<{
+  hideAdd?: boolean
+}>(), {
+  hideAdd: false,
+})
+
 const emit = defineEmits<{
   add: []
   batchDelete: []
@@ -15,7 +21,7 @@ const emit = defineEmits<{
       </n-button>
     </div>
     <div class="back-table-actions">
-      <n-button class="back-btn-add" @click="emit('add')">
+      <n-button v-if="!hideAdd" class="back-btn-add" @click="emit('add')">
         + 新增
       </n-button>
       <n-button class="back-btn-del" @click="emit('batchDelete')">

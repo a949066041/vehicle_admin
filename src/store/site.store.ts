@@ -22,7 +22,7 @@ const initData: Site[] = [
   },
   {
     id: 2,
-    site_name: '明城分校教练场',
+    site_name: '开发区',
     site_type: '科目二2',
     site_scale: '800平方米',
     site_address: '河北省保定市涿州市开发区永济东路',
@@ -37,7 +37,7 @@ const initData: Site[] = [
   },
   {
     id: 3,
-    site_name: '朝阳路训练场',
+    site_name: '朝阳路',
     site_type: '科目二1',
     site_scale: '600平方米',
     site_address: '河北省保定市涿州市朝阳路88号',
@@ -65,10 +65,40 @@ const initData: Site[] = [
     comment_num: 0,
     favorite_num: 3,
   },
+  {
+    id: 5,
+    site_name: '明城向阳教练场',
+    site_type: '科目二1',
+    site_scale: '900平方米',
+    site_address: '河北省保定市涿州市向阳大街',
+    longitude: 115.978,
+    latitude: 39.488,
+    site_photo: SITE_IMG,
+    site_intro: '科目二综合训练，坡道与侧方专项。',
+    capacity: 35,
+    click_num: 15,
+    comment_num: 0,
+    favorite_num: 5,
+  },
+  {
+    id: 6,
+    site_name: '明城长岭教练场',
+    site_type: '科目二2',
+    site_scale: '850平方米',
+    site_address: '河北省保定市涿州市长岭路',
+    longitude: 115.982,
+    latitude: 39.490,
+    site_photo: SITE_IMG,
+    site_intro: '科目二五项连训场地。',
+    capacity: 32,
+    click_num: 11,
+    comment_num: 0,
+    favorite_num: 4,
+  },
 ]
 
 export const useSiteStore = createGlobalState(() => {
-  const curd = useCurd<Site>({ key: 'driving-school-sites-v2', initData })
+  const curd = useCurd<Site>({ key: 'driving-school-sites-v3', initData })
 
   function bumpClick(id: number) {
     const i = curd.dataList.value.findIndex(s => s.id === id)

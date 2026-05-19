@@ -146,108 +146,40 @@ export const seedVehicleApplications: VehicleApplication[] = [
   },
 ]
 
-/** 练车预约假数据（项目 id 1–3、学员 1–2、教练 1–2） */
+/** 练车预约假数据（设计图 5.27，项目 id 1–10） */
 export const seedPracticeBookings: PracticeBooking[] = [
-  {
-    id: 1,
-    project_id: 1,
-    student_id: 1,
-    coach_id: 1,
-    appoint_date: d0,
-    status: '已通过',
-    remark: '科目二强化',
-    addtime: '2026-05-08 08:20:00',
-  },
-  {
-    id: 2,
-    project_id: 2,
-    student_id: 2,
-    coach_id: 1,
-    appoint_date: d0,
-    status: '已取消',
-    remark: '后已撤销预约',
-    addtime: '2026-05-08 09:05:00',
-  },
-  {
-    id: 3,
-    project_id: 3,
-    student_id: 1,
-    coach_id: 2,
-    appoint_date: d1,
-    status: '待审核',
-    remark: '',
-    addtime: '2026-05-10 14:40:00',
-  },
-  {
-    id: 4,
-    project_id: 2,
-    student_id: 1,
-    coach_id: 1,
-    appoint_date: '2025-04-09',
-    status: '已通过',
-    remark: '',
-    addtime: '2026-05-12 09:00:00',
-  },
+  { id: 1, project_id: 1, student_id: 1, coach_id: 4, appoint_date: '2025-04-09', status: '待审核', remark: '教练我想练车', check_remark: '', addtime: '2025-05-12 10:20:00' },
+  { id: 2, project_id: 7, student_id: 8, coach_id: 5, appoint_date: '2025-04-07', status: '待审核', remark: '教练你好，我想练车', check_remark: '', addtime: '2025-05-12 11:05:00' },
+  { id: 3, project_id: 8, student_id: 7, coach_id: 5, appoint_date: '2025-04-07', status: '已通过', remark: '教练你好，我想练车', check_remark: '好好练车', addtime: '2025-05-12 09:30:00' },
+  { id: 4, project_id: 9, student_id: 6, coach_id: 6, appoint_date: '2025-04-07', status: '已通过', remark: '想加强侧方', check_remark: '好好练车', addtime: '2025-05-11 16:00:00' },
+  { id: 5, project_id: 6, student_id: 6, coach_id: 6, appoint_date: '2025-04-08', status: '已通过', remark: '科目二练习', check_remark: '准时到场', addtime: '2025-05-11 14:20:00' },
+  { id: 6, project_id: 2, student_id: 2, coach_id: 4, appoint_date: '2025-04-09', status: '已驳回', remark: '预约练车', check_remark: '该时段已满', addtime: '2025-05-10 18:00:00' },
+  { id: 7, project_id: 11, student_id: 3, coach_id: 1, appoint_date: '2025-05-10', status: '待审核', remark: '科目二强化', check_remark: '', addtime: '2025-05-13 08:15:00' },
+  { id: 8, project_id: 12, student_id: 4, coach_id: 4, appoint_date: '2025-05-12', status: '已通过', remark: '路考练习', check_remark: '同意', addtime: '2025-05-12 07:40:00' },
+  { id: 9, project_id: 3, student_id: 5, coach_id: 5, appoint_date: '2025-04-09', status: '待审核', remark: '下午练车', check_remark: '', addtime: '2025-05-12 12:00:00' },
+  { id: 10, project_id: 5, student_id: 1, coach_id: 6, appoint_date: '2025-04-08', status: '已通过', remark: '科二训练', check_remark: '请提前10分钟到场', addtime: '2025-05-09 15:30:00' },
 ]
 
-/** 取消预约假数据（appoint_id 对应上表预约 id） */
+/** 取消预约假数据（设计图 5.28） */
 export const seedCancelBookings: CancelBookingRequest[] = [
-  {
-    id: 1,
-    appoint_id: 1,
-    student_id: 1,
-    cancel_reason: '约错了',
-    status: '已通过',
-    check_remark: '下次注意',
-    addtime: '2026-05-11 16:00:00',
-  },
-  {
-    id: 2,
-    appoint_id: 2,
-    student_id: 2,
-    cancel_reason: '身体不适，申请取消',
-    status: '已通过',
-    check_remark: '同意，已释放名额',
-    addtime: '2026-05-08 10:00:00',
-  },
-  {
-    id: 3,
-    appoint_id: 3,
-    student_id: 1,
-    cancel_reason: '想改约至周末时段',
-    status: '已驳回',
-    check_remark: '请先联系教练改约后再提交',
-    addtime: '2026-05-10 15:00:00',
-  },
+  { id: 1, appoint_id: 5, student_id: 6, cancel_reason: '约错了', status: '已通过', check_remark: '下次注意', addtime: '2025-05-11 16:00:00' },
+  { id: 2, appoint_id: 2, student_id: 8, cancel_reason: '约错了', status: '已通过', check_remark: '下次注意', addtime: '2025-05-10 14:00:00' },
+  { id: 3, appoint_id: 10, student_id: 1, cancel_reason: '约错了', status: '已通过', check_remark: '下次注意', addtime: '2025-05-09 11:20:00' },
+  { id: 4, appoint_id: 3, student_id: 7, cancel_reason: '时间冲突', status: '待审核', check_remark: '', addtime: '2025-05-12 09:00:00' },
+  { id: 5, appoint_id: 8, student_id: 4, cancel_reason: '身体不适', status: '已驳回', check_remark: '请先联系教练', addtime: '2025-05-11 10:30:00' },
+  { id: 6, appoint_id: 4, student_id: 6, cancel_reason: '改约其他时段', status: '待审核', check_remark: '', addtime: '2025-05-12 08:45:00' },
+  { id: 7, appoint_id: 1, student_id: 1, cancel_reason: '临时有事', status: '待审核', check_remark: '', addtime: '2025-05-12 13:10:00' },
+  { id: 8, appoint_id: 9, student_id: 5, cancel_reason: '约错了', status: '已通过', check_remark: '已释放名额', addtime: '2025-05-08 17:00:00' },
 ]
 
-/** 考试申请假数据（考试 id 1–2、学员 1–2） */
+/** 考试申请假数据（设计图 5.30） */
 export const seedExamApplies: ExamApply[] = [
-  {
-    id: 1,
-    exam_id: 1,
-    student_id: 1,
-    apply_date: d0,
-    status: '待审核',
-    check_remark: '',
-    addtime: '2026-05-09 13:20:00',
-  },
-  {
-    id: 2,
-    exam_id: 2,
-    student_id: 2,
-    apply_date: d0,
-    status: '已通过',
-    check_remark: '材料齐全',
-    addtime: '2026-05-08 15:00:00',
-  },
-  {
-    id: 3,
-    exam_id: 1,
-    student_id: 2,
-    apply_date: d1,
-    status: '已驳回',
-    check_remark: '科目一未结业，暂不可约',
-    addtime: '2026-05-10 09:30:00',
-  },
+  { id: 1, exam_id: 3, student_id: 1, apply_date: '2025-05-12', status: '待审核', check_remark: '', addtime: '2025-05-12 23:52:52' },
+  { id: 2, exam_id: 1, student_id: 2, apply_date: '2025-05-12', status: '已驳回', check_remark: '你还不够时间', addtime: '2025-05-12 23:39:44' },
+  { id: 3, exam_id: 2, student_id: 1, apply_date: '2025-05-12', status: '已通过', check_remark: '加油', addtime: '2025-05-12 23:38:41' },
+  { id: 4, exam_id: 4, student_id: 3, apply_date: '2025-05-11', status: '待审核', check_remark: '', addtime: '2025-05-11 20:15:00' },
+  { id: 5, exam_id: 6, student_id: 4, apply_date: '2025-05-11', status: '已通过', check_remark: '准时参考', addtime: '2025-05-11 18:30:00' },
+  { id: 6, exam_id: 5, student_id: 5, apply_date: '2025-05-10', status: '已驳回', check_remark: '名额已满', addtime: '2025-05-10 16:00:00' },
+  { id: 7, exam_id: 7, student_id: 6, apply_date: '2025-05-10', status: '已通过', check_remark: '好好准备', addtime: '2025-05-10 14:22:00' },
+  { id: 8, exam_id: 8, student_id: 7, apply_date: '2025-05-09', status: '待审核', check_remark: '', addtime: '2025-05-09 11:08:00' },
 ]
