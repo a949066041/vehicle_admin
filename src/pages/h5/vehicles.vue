@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isVehicleIdle, VehicleStatus } from '~/constants/vehicle-status'
 import { useVehicleStore } from '~/store'
 
 const { dataList } = useVehicleStore()
@@ -21,15 +22,23 @@ const { dataList } = useVehicleStore()
           </div>
           <p class="mt-1 text-sm text-slate-600">
             {{ v.car_num }} · {{ v.car_type }}
+            <template v-if="v.car_year">
+              · {{ v.car_year }}年
+            </template>
           </p>
         </div>
         <span
           class="shrink-0 rounded-full px-2 py-0.5 text-xs font-medium"
-          :class="v.status === '空闲' ? 'bg-emerald-50 text-[#07c160]' : 'bg-amber-50 text-amber-700'"
+          :class="isVehicleIdle(v.status)
+            ? 'bg-emerald-50 text-[#07c160]'
+            : 'bg-amber-50 text-amber-700'"
         >
           {{ v.status }}
         </span>
       </div>
+      <p v-if="v.status === VehicleStatus.Applied" class="mt-2 text-xs text-amber-600">
+        该车辆已被教练申请使用
+      </p>
     </div>
   </div>
 </template>

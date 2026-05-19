@@ -19,6 +19,8 @@ export interface Student {
   id_card: string
   address: string
   car_type: string
+  /** 报名类型：包补考 / 仅包初考 */
+  enroll_type?: string
   /** 头像（图片 URL，可为空） */
   avatar: string
   /** 在训 / 毕业 / 停训 */
@@ -40,6 +42,8 @@ export interface Coach {
   /** 头像（图片 URL，可为空） */
   avatar: string
   click_num: number
+  comment_num?: number
+  favorite_num?: number
   /** 1 在职 0 停用 */
   enabled: 0 | 1
   addtime?: string
@@ -61,7 +65,9 @@ export interface Vehicle {
   car_type: string
   car_num: string
   car_photo: string
-  /** 空闲 / 使用中 / 维修 */
+  car_year?: number
+  mileage?: number
+  /** 空闲 / 已被申请，见 VehicleStatus 枚举 */
   status: string
   addtime?: string
 }

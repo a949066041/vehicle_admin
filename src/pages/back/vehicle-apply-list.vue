@@ -7,6 +7,7 @@ import BackApplyToolbar from '~/components/back/BackApplyToolbar.vue'
 import BackCrudModal from '~/components/BackCrudModal.vue'
 import BackRowActions from '~/components/back/BackRowActions.vue'
 import { useCoachStore, useVehicleApplicationStore, useVehicleStore } from '~/store'
+import { VehicleStatus } from '~/constants/vehicle-status'
 import { auditStatusLabel } from '~/utils/h5-booking'
 
 const message = useMessage()
@@ -124,7 +125,7 @@ function syncVehicleOnApprove(carId: number, status: string) {
     return
   const i = vehicles.value.findIndex(v => v.id === carId)
   if (i >= 0)
-    vehicles.value[i] = { ...vehicles.value[i]!, status: '已被申请' }
+    vehicles.value[i] = { ...vehicles.value[i]!, status: VehicleStatus.Applied }
 }
 
 function openAudit(ids: number[]) {

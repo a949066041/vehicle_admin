@@ -121,7 +121,7 @@ function handleLogin() {
         </div>
       </n-space>
       <p class="mt-6 text-center text-xs leading-relaxed text-slate-500">
-        演示：管理员 admin001 / 123456；教练 coach001 / 123456；学员 student001 / 123456
+        演示：管理员 admin001 / 123456；教练 coach001 / 123456；学员 202501 或 student001 / 123456
       </p>
     </div>
   </div>
