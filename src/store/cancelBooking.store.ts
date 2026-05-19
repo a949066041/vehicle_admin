@@ -7,11 +7,16 @@ import { usePracticeBookingStore } from './practiceBooking.store'
 
 export const useCancelBookingStore = createGlobalState(() => {
   const list = useLocalStorage<CancelBookingRequest[]>(
-    'driving-school-cancel-bookings-v2',
+    'driving-school-cancel-bookings-v3',
     () => seedCancelBookings.map(r => ({ ...r })),
   )
 
   function submitCancel(input: { appoint_id: number, student_id: number, cancel_reason: string }) {
+    const dup = list.value.some(
+      c => c.appoint_id === input.appoint_id && c.student_id === input.student_id && c.status === '待审核',
+    )
+    if (dup)
+      return { ok: false, message: '该预约已有待审核的取消申请' }
     const row: CancelBookingRequest = {
       id: nextNumericId(list.value),
       appoint_id: input.appoint_id,
@@ -22,7 +27,11 @@ export const useCancelBookingStore = createGlobalState(() => {
       addtime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
     }
     list.value = [...list.value, row]
-    return { ok: true, row }
+    return { ok: true, row, message: '取消申请已提交，请等候审核' }
+  }
+
+  function cancelForAppoint(appointId: number) {
+    return list.value.find(c => c.appoint_id === appointId) ?? null
   }
 
   function setStatus(id: number, status: CancelBookingRequest['status'], check_remark?: string) {
@@ -39,5 +48,5 @@ export const useCancelBookingStore = createGlobalState(() => {
     return true
   }
 
-  return { list, submitCancel, setStatus }
+  return { list, submitCancel, setStatus, cancelForAppoint }
 })

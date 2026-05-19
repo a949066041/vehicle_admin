@@ -73,6 +73,16 @@ export const seedPracticeBookings: PracticeBooking[] = [
     remark: '',
     addtime: '2026-05-10 14:40:00',
   },
+  {
+    id: 4,
+    project_id: 2,
+    student_id: 1,
+    coach_id: 1,
+    appoint_date: '2025-04-09',
+    status: '已通过',
+    remark: '',
+    addtime: '2026-05-12 09:00:00',
+  },
 ]
 
 /** 取消预约假数据（appoint_id 对应上表预约 id） */
@@ -81,9 +91,9 @@ export const seedCancelBookings: CancelBookingRequest[] = [
     id: 1,
     appoint_id: 1,
     student_id: 1,
-    cancel_reason: '临时加班，无法参加当日练车',
-    status: '待审核',
-    check_remark: '',
+    cancel_reason: '约错了',
+    status: '已通过',
+    check_remark: '下次注意',
     addtime: '2026-05-11 16:00:00',
   },
   {

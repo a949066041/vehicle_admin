@@ -29,7 +29,7 @@ const active = computed(() => {
     return '/h5/exam'
   if (p.startsWith('/h5/messages') || p.startsWith('/h5/ai'))
     return '/h5/messages'
-  if (p.startsWith('/h5/profile') || p.startsWith('/h5/pay') || p.startsWith('/h5/pay-success') || p.startsWith('/h5/fees') || p.startsWith('/h5/review') || p.startsWith('/h5/my-bookings'))
+  if (p.startsWith('/h5/profile') || p.startsWith('/h5/pay') || p.startsWith('/h5/pay-success') || p.startsWith('/h5/fees') || p.startsWith('/h5/review') || p.startsWith('/h5/my-bookings') || p.startsWith('/h5/booking'))
     return '/h5/profile'
   return ''
 })

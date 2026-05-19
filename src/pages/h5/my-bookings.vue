@@ -1,10 +1,19 @@
 <script setup lang="ts">
-import { useCancelBookingStore, useLoginStore, usePracticeBookingStore, useTrainingProjectStore } from '~/store'
+import { RouterLink } from 'vue-router'
+import {
+  useCancelBookingStore,
+  useLoginStore,
+  usePracticeBookingStore,
+  useSiteStore,
+  useTrainingProjectStore,
+} from '~/store'
+import { auditStatusLabel, subjectShort } from '~/utils/h5-booking'
 
 const { currentProfile } = useLoginStore()
 const { list: bookings } = usePracticeBookingStore()
 const { dataList: projects } = useTrainingProjectStore()
-const { list: cancels } = useCancelBookingStore()
+const { dataList: sites } = useSiteStore()
+const { cancelForAppoint } = useCancelBookingStore()
 
 const mine = computed(() => {
   const sid = currentProfile.value?.id
@@ -13,48 +22,97 @@ const mine = computed(() => {
   return [...bookings.value].filter(b => b.student_id === sid).sort((a, b) => b.id - a.id)
 })
 
-function cancelRowFor(appointId: number) {
-  return cancels.value.find(c => c.appoint_id === appointId)
+function projectOf(pid: number) {
+  return projects.value.find(p => p.id === pid)
 }
 
-function name(pid: number) {
-  return projects.value.find(p => p.id === pid)?.project_name ?? `#${pid}`
+function venueLabel(siteId: number) {
+  const site = sites.value.find(s => s.id === siteId)
+  if (!site)
+    return '—'
+  const m = site.site_address.match(/[\u4e00-\u9fa5]{2,6}(路|街|大道)/)
+  return m?.[0] ?? site.site_name
+}
+
+function statusText(b: (typeof bookings.value)[0]) {
+  const cancel = cancelForAppoint(b.id)
+  if (cancel)
+    return `取消${auditStatusLabel(cancel.status)}`
+  return auditStatusLabel(b.status)
 }
 </script>
 
 <template>
-  <div class="space-y-2">
-    <p class="rounded-lg bg-white px-3 py-2 text-[13px] text-slate-600 shadow-sm">
-      练车预约记录；取消申请状态见每条下方标签。
+  <div class="bookings-page -mx-2.5 space-y-2">
+    <p class="mx-2.5 rounded-lg bg-white px-3 py-2 text-[13px] text-slate-600 shadow-sm">
+      练车预约记录，点击进入详情；可提交取消申请并查看审核结果。
     </p>
-    <div
+
+    <RouterLink
       v-for="b in mine"
       :key="b.id"
-      class="rounded-xl border border-slate-100 bg-white p-3.5 shadow-sm"
+      :to="`/h5/booking/${b.id}`"
+      class="info-card block overflow-hidden active:opacity-90"
     >
-      <div class="flex items-start justify-between gap-2">
-        <div>
-          <div class="text-[15px] font-medium text-slate-900">
-            {{ name(b.project_id) }}
-          </div>
-          <div class="mt-1 text-xs text-slate-500">
-            预约日 {{ b.appoint_date }}
-          </div>
-        </div>
-        <n-tag size="small" :type="b.status === '已通过' ? 'success' : b.status === '待审核' ? 'warning' : 'default'">
-          {{ b.status }}
-        </n-tag>
+      <div class="info-row">
+        <span class="info-label">练车科目</span>
+        <span class="info-value">
+          {{ projectOf(b.project_id) ? subjectShort(projectOf(b.project_id)!.subject) : '—' }}
+        </span>
       </div>
-      <p v-if="b.remark" class="mt-2 text-xs text-slate-400">
-        备注：{{ b.remark }}
-      </p>
-      <div v-if="cancelRowFor(b.id)" class="mt-2 flex items-center justify-between rounded-lg bg-slate-50 px-2 py-1.5 text-xs">
-        <span class="text-slate-600">取消申请</span>
-        <n-tag size="small" :type="cancelRowFor(b.id)!.status === '已通过' ? 'success' : cancelRowFor(b.id)!.status === '已驳回' ? 'error' : 'warning'">
-          <span>{{ cancelRowFor(b.id)!.status }}</span>
-        </n-tag>
+      <div class="info-row">
+        <span class="info-label">练车日期</span>
+        <span class="info-value">{{ b.appoint_date }}</span>
       </div>
-    </div>
-    <n-empty v-if="!mine.length" description="暂无预约" />
+      <div class="info-row">
+        <span class="info-label">练车场地</span>
+        <span class="info-value">
+          {{ projectOf(b.project_id) ? venueLabel(projectOf(b.project_id)!.site_id) : '—' }}
+        </span>
+      </div>
+      <div class="info-row !border-b-0">
+        <span class="info-label">状态</span>
+        <span class="info-value">{{ statusText(b) }}</span>
+      </div>
+    </RouterLink>
+
+    <n-empty v-if="!mine.length" class="!py-12" description="暂无预约记录" />
   </div>
 </template>
+
+<style scoped>
+.bookings-page {
+  font-size: 15px;
+  color: #333;
+  padding-bottom: 8px;
+}
+
+.info-card {
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.info-label {
+  flex-shrink: 0;
+  width: 5.5em;
+  font-size: 15px;
+  color: #333;
+}
+
+.info-value {
+  flex: 1;
+  text-align: right;
+  font-size: 15px;
+  color: #666;
+}
+</style>
