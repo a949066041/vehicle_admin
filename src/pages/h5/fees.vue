@@ -6,7 +6,7 @@ import { useFeeStore, useLoginStore } from '~/store'
 const message = useMessage()
 const router = useRouter()
 const { currentProfile } = useLoginStore()
-const { dataList, updateData } = useFeeStore()
+const { dataList, payFee } = useFeeStore()
 
 const mine = computed(() => {
   const sid = currentProfile.value?.id
@@ -20,15 +20,10 @@ function pay(row: (typeof dataList.value)[0]) {
     message.info('该订单已支付')
     return
   }
-  const i = dataList.value.findIndex(x => x.id === row.id)
-  if (i < 0)
+  if (!payFee(row.id)) {
+    message.error('支付失败')
     return
-  updateData(i, {
-    ...row,
-    pay_status: '已支付',
-    pay_time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-    invoice: `INV-${dayjs().format('YYYYMMDDHHmmss')}`,
-  })
+  }
   router.push({ path: '/h5/pay-success', query: { feeId: String(row.id) } })
 }
 

@@ -169,10 +169,17 @@ export interface FeeRecord {
   fee_name: string
   fee_amount: number
   fee_type: string
+  /** 报名类型：包补考 / 仅包初考 */
+  enroll_type?: string
   /** 待支付 / 已支付 */
   pay_status: string
+  /** 缴费日期 YYYY-MM-DD */
+  pay_date?: string
   pay_time: string | null
+  /** 发票/凭证编号 */
   invoice: string
+  /** 相关票据图片 URL */
+  invoice_image?: string
   addtime?: string
 }
 
