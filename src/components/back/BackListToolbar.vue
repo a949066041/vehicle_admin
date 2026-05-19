@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 withDefaults(defineProps<{
   hideAdd?: boolean
+  hideDelete?: boolean
 }>(), {
   hideAdd: false,
+  hideDelete: false,
 })
 
 const emit = defineEmits<{
@@ -24,7 +26,7 @@ const emit = defineEmits<{
       <n-button v-if="!hideAdd" class="back-btn-add" @click="emit('add')">
         + 新增
       </n-button>
-      <n-button class="back-btn-del" @click="emit('batchDelete')">
+      <n-button v-if="!hideDelete" class="back-btn-del" @click="emit('batchDelete')">
         删除
       </n-button>
     </div>

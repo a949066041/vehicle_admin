@@ -17,8 +17,13 @@ const initData: TrainingProject[] = [
   { id: 10, project_name: '科三-花田路上午', subject: '科三', car_type: 'C1', site_id: 4, coach_id: 3, car_id: 6, train_date: '2025-04-02', train_time: '9:00-10:00', max_num: 1, booked_num: 0, status: '可预约', book_status: '可预约', practice_photo: PRACTICE_PHOTO, comment_num: 0, favorite_num: 0 },
   { id: 11, project_name: '科二-总校强化', subject: '科二', car_type: 'C1', site_id: 1, coach_id: 1, car_id: 1, train_date: '2025-05-10', train_time: '09:00-11:00', max_num: 4, booked_num: 2, status: '可预约', book_status: '可预约', practice_photo: PRACTICE_PHOTO, comment_num: 1, favorite_num: 2 },
   { id: 12, project_name: '科三-总校路考', subject: '科三', car_type: 'C2', site_id: 4, coach_id: 4, car_id: 2, train_date: '2025-05-12', train_time: '14:00-16:00', max_num: 3, booked_num: 1, status: '可预约', book_status: '已预约', practice_photo: PRACTICE_PHOTO, comment_num: 0, favorite_num: 1 },
+  { id: 13, project_name: '科二-明城午间', subject: '科二', car_type: 'C1', site_id: 1, coach_id: 1, car_id: 2, train_date: '2025-03-20', train_time: '11:00-12:00', max_num: 1, booked_num: 0, status: '可预约', book_status: '可预约', practice_photo: PRACTICE_PHOTO, comment_num: 0, favorite_num: 0 },
+  { id: 14, project_name: '科二-明城早班', subject: '科二', car_type: 'C1', site_id: 1, coach_id: 1, car_id: 2, train_date: '2025-03-20', train_time: '8:00-9:00', max_num: 1, booked_num: 1, status: '可预约', book_status: '已预约', practice_photo: PRACTICE_PHOTO, comment_num: 0, favorite_num: 0 },
+  { id: 15, project_name: '科二-总校下午', subject: '科二', car_type: 'C1', site_id: 1, coach_id: 1, car_id: 1, train_date: '2025-03-21', train_time: '14:00-15:00', max_num: 1, booked_num: 0, status: '可预约', book_status: '可预约', practice_photo: PRACTICE_PHOTO, comment_num: 1, favorite_num: 0 },
+  { id: 16, project_name: '科三-总校路练', subject: '科三', car_type: 'C1', site_id: 1, coach_id: 1, car_id: 1, train_date: '2025-03-22', train_time: '9:00-10:00', max_num: 1, booked_num: 1, status: '可预约', book_status: '已预约', practice_photo: PRACTICE_PHOTO, comment_num: 0, favorite_num: 1 },
+  { id: 17, project_name: '科二-总校周末', subject: '科二', car_type: 'C1', site_id: 1, coach_id: 1, car_id: 1, train_date: '2025-03-23', train_time: '10:00-11:00', max_num: 2, booked_num: 1, status: '可预约', book_status: '可预约', practice_photo: PRACTICE_PHOTO, comment_num: 0, favorite_num: 2 },
 ]
 
 export const useTrainingProjectStore = createGlobalState(() => {
-  return useCurd<TrainingProject>({ key: 'driving-school-training-projects-v2', initData })
+  return useCurd<TrainingProject>({ key: 'driving-school-training-projects-v3', initData })
 })

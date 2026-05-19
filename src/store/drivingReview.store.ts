@@ -119,10 +119,29 @@ const seedReviews: DrivingReview[] = [
     coach_reply: '',
     addtime: '2025-04-05 11:08:00',
   },
+  {
+    id: 7,
+    student_id: 4,
+    coach_id: 1,
+    subject: '科三',
+    car_type: 'C1',
+    practice_photo: PRACTICE_PHOTO,
+    student_star: 5,
+    student_service_star: 5,
+    student_attitude_star: 5,
+    student_comment: '预约练车体验好',
+    coach_star: 0,
+    coach_progress_star: 0,
+    coach_attitude_star: 0,
+    coach_comment: '',
+    student_reply: '',
+    coach_reply: '',
+    addtime: '2025-03-22 10:00:00',
+  },
 ]
 
 export const useDrivingReviewStore = createGlobalState(() => {
-  const list = useLocalStorage<DrivingReview[]>('driving-school-reviews-v3', () => seedReviews.map(r => ({ ...r })))
+  const list = useLocalStorage<DrivingReview[]>('driving-school-reviews-v4', () => seedReviews.map(r => ({ ...r })))
 
   function upsertStudentReview(input: {
     student_id: number

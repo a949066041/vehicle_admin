@@ -7,7 +7,7 @@ import { useTrainingProjectStore } from './trainingProject.store'
 
 export const usePracticeBookingStore = createGlobalState(() => {
   const list = useLocalStorage<PracticeBooking[]>(
-    'driving-school-practice-bookings-v4',
+    'driving-school-practice-bookings-v5',
     () => seedPracticeBookings.map(r => ({ ...r })),
   )
 

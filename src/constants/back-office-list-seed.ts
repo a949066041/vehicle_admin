@@ -158,6 +158,11 @@ export const seedPracticeBookings: PracticeBooking[] = [
   { id: 8, project_id: 12, student_id: 4, coach_id: 4, appoint_date: '2025-05-12', status: '已通过', remark: '路考练习', check_remark: '同意', addtime: '2025-05-12 07:40:00' },
   { id: 9, project_id: 3, student_id: 5, coach_id: 5, appoint_date: '2025-04-09', status: '待审核', remark: '下午练车', check_remark: '', addtime: '2025-05-12 12:00:00' },
   { id: 10, project_id: 5, student_id: 1, coach_id: 6, appoint_date: '2025-04-08', status: '已通过', remark: '科二训练', check_remark: '请提前10分钟到场', addtime: '2025-05-09 15:30:00' },
+  { id: 11, project_id: 14, student_id: 1, coach_id: 1, appoint_date: '2025-03-20', status: '已通过', remark: '', check_remark: '认真学习!', addtime: '2025-03-20 07:15:00' },
+  { id: 12, project_id: 13, student_id: 2, coach_id: 1, appoint_date: '2025-03-19', status: '待审核', remark: '希望练习倒库', check_remark: '', addtime: '2025-03-19 16:40:00' },
+  { id: 13, project_id: 15, student_id: 3, coach_id: 1, appoint_date: '2025-03-21', status: '已通过', remark: '侧方停车加强', check_remark: '准时到场', addtime: '2025-03-21 08:00:00' },
+  { id: 14, project_id: 16, student_id: 4, coach_id: 1, appoint_date: '2025-03-22', status: '待审核', remark: '科三路考练习', check_remark: '', addtime: '2025-03-22 09:30:00' },
+  { id: 15, project_id: 17, student_id: 5, coach_id: 1, appoint_date: '2025-03-23', status: '已通过', remark: '周末练车', check_remark: '注意安全', addtime: '2025-03-23 07:50:00' },
 ]
 
 /** 取消预约假数据（设计图 5.28） */
