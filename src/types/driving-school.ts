@@ -203,6 +203,10 @@ export interface VehicleApplication {
   car_id: number
   coach_id: number
   apply_date: string
+  /** 使用时间展示，如 5月15日 */
+  usage_time?: string
+  /** 使用说明，如练车 */
+  usage_desc?: string
   /** 待审核 / 已通过 / 已驳回 */
   status: string
   check_remark: string

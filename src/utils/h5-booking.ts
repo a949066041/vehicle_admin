@@ -1,9 +1,9 @@
-/** 审核状态展示（设计图：通过 / 待审核） */
+/** 审核状态展示（设计图：通过 / 不通过 / 待审核） */
 export function auditStatusLabel(status: string) {
   if (status === '已通过')
     return '通过'
   if (status === '已驳回')
-    return '驳回'
+    return '不通过'
   return status
 }
 
