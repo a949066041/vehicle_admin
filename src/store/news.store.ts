@@ -1,27 +1,109 @@
 import type { NewsItem } from '~/types/driving-school'
 import { createGlobalState } from '@vueuse/core'
-import dayjs from 'dayjs'
 import { useCurd } from '~/hooks'
 
+const cover = (seed: string) => `https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=320&h=200&fit=crop&sig=${seed}`
+
+/** 驾校公告资讯假数据 */
 const initData: NewsItem[] = [
   {
     id: 1,
-    title: '春节期间练车安排通知',
-    summary: '除夕至初三训练场闭场，初四起恢复正常预约。',
-    content: '尊敬的学员：根据国家法定节假日安排，我校训练场除夕至正月初三暂停开放，正月初四起恢复预约练车。请提前在系统中调整预约计划。',
-    cover: 'https://picsum.photos/seed/jxj1/320/200',
-    publish_time: dayjs().subtract(3, 'day').format('YYYY-MM-DD HH:mm'),
+    title: '欢迎使用明域驾校练车预约系统',
+    summary: '学员可通过微信小程序完成练车预约、考试申请与费用缴纳。',
+    content: '明域驾校正式上线智慧练车管理系统。学员端支持查看练车项目、在线预约、考试报名、费用支付及双向评价；教练端可提交车辆申请；管理端提供全流程审核与数据统计。请各位学员及时完善个人信息。',
+    cover: cover('news1'),
+    publish_time: '2025-05-18 09:00',
   },
   {
     id: 2,
-    title: '科目三新增考试线路说明',
-    summary: '自本月起启用道义大街考试线路，请教练与学员知悉。',
-    content: '交管部门已批复新增考试线路，详见附件示意图。各教练组请在教学资源库下载最新路线图。',
-    cover: 'https://picsum.photos/seed/jxj2/320/200',
-    publish_time: dayjs().subtract(1, 'day').format('YYYY-MM-DD HH:mm'),
+    title: '2025年五一假期练车安排通知',
+    summary: '5月1日至3日训练场上午开放，下午维护，请提前预约时段。',
+    content: '根据国家法定节假日安排，我校训练场5月1日至5月3日上午8:00-12:00正常开放练车，下午进行场地维护暂停预约。5月4日起全面恢复，请学员与教练合理规划练车时间。',
+    cover: cover('news2'),
+    publish_time: '2025-04-28 14:30',
+  },
+  {
+    id: 3,
+    title: '科目三新增考试线路启用说明',
+    summary: '自4月15日起启用花田路、朝阳路科目三考试线路。',
+    content: '经交管部门批复，我校科目三训练新增花田路、朝阳路两段实际道路线路。各教练请在教学资源库下载最新路线图，并组织学员熟悉路口掉头、靠边停车等考试项目。',
+    cover: cover('news3'),
+    publish_time: '2025-04-15 10:20',
+  },
+  {
+    id: 4,
+    title: '科目二场地设备升级完成',
+    summary: '明城向阳教练场倒车入库、侧方停车标线已重新施划。',
+    content: '为提升训练质量，明城向阳教练场于4月8日至4月12日进行场地升级，现已完成倒车入库、侧方停车、曲线行驶标线施划及监控设备调试，欢迎各科目二学员预约练车。',
+    cover: cover('news4'),
+    publish_time: '2025-04-12 16:00',
+  },
+  {
+    id: 5,
+    title: '2025年春季招生优惠政策',
+    summary: '即日起至6月30日，C1/C2报名享培训费减免优惠。',
+    content: '明域驾校2025年春季招生火热进行中。活动期间报名C1手动挡享减免300元，C2自动挡享减免200元，包补考班型另赠科目二模拟考一次。详情咨询前台或登录系统查看费用说明。',
+    cover: cover('news5'),
+    publish_time: '2025-04-01 09:30',
+  },
+  {
+    id: 6,
+    title: '教练车辆申请流程说明',
+    summary: '教练须提前在管理端提交车辆使用申请，审核通过后方可排课。',
+    content: '为保障训练车辆合理调配，自即日起教练使用教学车辆须通过系统提交车辆申请，由管理员审核。待审核、已通过、不通过状态可在车辆申请管理中查询，未通过申请请根据审核意见修改后重新提交。',
+    cover: cover('news6'),
+    publish_time: '2025-03-25 11:15',
+  },
+  {
+    id: 7,
+    title: '科目一理论考试批次安排',
+    summary: '3月30日、4月7日高碑店乐航考场理论考试，请学员按时参考。',
+    content: '我校组织学员参加科目一理论考试，考点：高碑店乐航考场。批次一：3月30日上午；批次二：4月7日上午。请已报名学员携带身份证提前30分钟到达，遵守考场纪律。',
+    cover: cover('news7'),
+    publish_time: '2025-03-20 08:45',
+  },
+  {
+    id: 8,
+    title: '雨天练车安全提示',
+    summary: '遇降雨天气请减速慢行，科目三练车以教练安排为准。',
+    content: '雨季来临，请各教练与学员注意行车安全。科目二场地练车如遇暴雨将暂停开放；科目三实际道路练车须开启雾灯、保持车距，服从教练指挥。系统预约时段如有调整以教练通知为准。',
+    cover: cover('news8'),
+    publish_time: '2025-03-15 13:50',
+  },
+  {
+    id: 9,
+    title: '学员评价功能上线通知',
+    summary: '练车结束后可对教练服务质量进行星级评价并互相回复。',
+    content: '为持续改进教学服务，系统已开通双向评价功能。学员可对教练的服务质量、服务态度评分；教练可对学员学习成果、学习态度评价。评价记录可在管理端查询，欢迎客观反馈。',
+    cover: cover('news9'),
+    publish_time: '2025-03-08 15:20',
+  },
+  {
+    id: 10,
+    title: '清明节放假安排',
+    summary: '4月4日至6日训练场闭场，4月7日起恢复预约。',
+    content: '清明节期间（4月4日至4月6日）我校各训练场暂停开放，线上预约功能同步关闭。4月7日起恢复正常运营，请学员提前规划练车与考试安排。',
+    cover: cover('news10'),
+    publish_time: '2025-03-28 10:00',
+  },
+  {
+    id: 11,
+    title: '新能源教练车投入使用',
+    summary: '哪吒V、比亚迪等C2自动挡教练车已投入科目二、科目三训练。',
+    content: '为响应绿色驾培号召，我校新增多台新能源自动挡教练车，分布于明城总校、开发区训练场。C2学员预约时可优先选择新能源车型，具体车辆以系统排期为准。',
+    cover: cover('news11'),
+    publish_time: '2025-02-20 09:00',
+  },
+  {
+    id: 12,
+    title: '系统维护升级公告',
+    summary: '2月18日凌晨2:00-5:00系统维护，期间暂停预约服务。',
+    content: '为提升系统稳定性，定于2025年2月18日凌晨2:00至5:00进行服务器维护升级。维护期间微信小程序及管理端暂停服务，请提前做好练车预约安排。维护完成后将恢复正常，感谢您的理解与支持。',
+    cover: cover('news12'),
+    publish_time: '2025-02-15 17:30',
   },
 ]
 
 export const useNewsStore = createGlobalState(() => {
-  return useCurd<NewsItem>({ key: 'driving-school-news-v2', initData })
+  return useCurd<NewsItem>({ key: 'driving-school-news-v3', initData })
 })
