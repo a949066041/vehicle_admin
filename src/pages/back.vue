@@ -27,7 +27,7 @@ const menuOptions: MenuOption[] = [
     children: [
       { label: () => h(RouterLink, { to: '/back/vehicle-list' }, '车辆信息管理'), key: 'vehicle-list' },
       { label: () => h(RouterLink, { to: '/back/vehicle-apply-list' }, '车辆申请管理'), key: 'vehicle-apply-list' },
-      { label: () => h(RouterLink, { to: '/back/site-list' }, '场地信息管理'), key: 'site-list' },
+      { label: () => h(RouterLink, { to: '/back/site-list' }, '场地信息'), key: 'site-list' },
     ],
   },
   {

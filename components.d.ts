@@ -10,6 +10,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     ActionButton: typeof import('./src/components/ActionButton.vue')['default']
     BackCrudModal: typeof import('./src/components/BackCrudModal.vue')['default']
+    BackListToolbar: typeof import('./src/components/back/BackListToolbar.vue')['default']
+    BackRowActions: typeof import('./src/components/back/BackRowActions.vue')['default']
     ColorColumn: typeof import('./src/components/ColorColumn.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NCard: typeof import('naive-ui')['NCard']
@@ -42,5 +44,6 @@ declare module 'vue' {
     NTag: typeof import('naive-ui')['NTag']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SiteMapPicker: typeof import('./src/components/back/SiteMapPicker.vue')['default']
   }
 }

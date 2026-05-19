@@ -70,6 +70,10 @@ export interface Vehicle {
 export interface Site {
   id: number
   site_name: string
+  /** 场地类型，如科目二1 */
+  site_type?: string
+  /** 场地规模，如 1000平方米 */
+  site_scale?: string
   site_address: string
   longitude: number
   latitude: number
@@ -77,6 +81,9 @@ export interface Site {
   site_intro: string
   /** 容纳人数 */
   capacity: number
+  click_num?: number
+  comment_num?: number
+  favorite_num?: number
   addtime?: string
 }
 

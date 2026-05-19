@@ -40,14 +40,16 @@ function onConfirm() {
   >
     <slot />
     <template #footer>
-      <n-space justify="end">
-        <n-button @click="onCancel">
-          取消
-        </n-button>
-        <n-button :type="props.confirmBtnType" @click="onConfirm">
-          确定
-        </n-button>
-      </n-space>
+      <slot name="footer">
+        <n-space justify="end">
+          <n-button @click="onCancel">
+            取消
+          </n-button>
+          <n-button :type="props.confirmBtnType" @click="onConfirm">
+            确定
+          </n-button>
+        </n-space>
+      </slot>
     </template>
   </n-modal>
 </template>
