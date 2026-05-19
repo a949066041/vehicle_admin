@@ -169,9 +169,21 @@ export interface DrivingReview {
   id: number
   student_id: number
   coach_id: number
+  /** 练车科目，如科二 */
+  subject?: string
+  /** 练车图片 */
+  practice_photo?: string
   student_star: number
+  /** 服务质量（星），缺省同 student_star */
+  student_service_star?: number
+  /** 服务态度（星），缺省同 student_star */
+  student_attitude_star?: number
   student_comment: string
   coach_star: number
+  /** 学习成果（星），缺省同 coach_star */
+  coach_progress_star?: number
+  /** 学习态度（星），缺省同 coach_star */
+  coach_attitude_star?: number
   coach_comment: string
   student_reply: string
   coach_reply: string

@@ -1,45 +1,79 @@
 import type { DrivingReview } from '~/types/driving-school'
 import { createGlobalState, useLocalStorage } from '@vueuse/core'
+import dayjs from 'dayjs'
 import { nextNumericId } from '~/utils/driving-school'
 
+const DEFAULT_PRACTICE_PHOTO = 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&h=400&fit=crop'
+
 export const useDrivingReviewStore = createGlobalState(() => {
-  const list = useLocalStorage<DrivingReview[]>('driving-school-reviews', [
+  const list = useLocalStorage<DrivingReview[]>('driving-school-reviews-v2', [
     {
       id: 1,
       student_id: 1,
       coach_id: 1,
+      subject: '科二',
+      practice_photo: DEFAULT_PRACTICE_PHOTO,
       student_star: 5,
-      student_comment: '讲解清楚，练车安排合理。',
+      student_service_star: 5,
+      student_attitude_star: 5,
+      student_comment: '教练认真负责',
       coach_star: 5,
-      coach_comment: '学员认真，进步快。',
-      student_reply: '谢谢教练！',
-      coach_reply: '加油通过考试！',
+      coach_progress_star: 5,
+      coach_attitude_star: 5,
+      coach_comment: '进步很大，继续努力！',
+      student_reply: '谢谢教练',
+      coach_reply: '',
+      addtime: '2025-04-08 23:56:08',
     },
   ])
 
-  function upsertStudentReview(input: { student_id: number, coach_id: number, student_star: number, student_comment: string }) {
+  function upsertStudentReview(input: {
+    student_id: number
+    coach_id: number
+    student_star: number
+    student_comment: string
+    subject?: string
+    practice_photo?: string
+    student_service_star?: number
+    student_attitude_star?: number
+  }) {
+    const now = dayjs().format('YYYY-MM-DD HH:mm:ss')
+    const service = input.student_service_star ?? input.student_star
+    const attitude = input.student_attitude_star ?? input.student_star
     const i = list.value.findIndex(r => r.student_id === input.student_id && r.coach_id === input.coach_id)
     if (i >= 0) {
       const r = list.value[i]!
-      list.value[i] = { ...r, ...input }
+      list.value[i] = {
+        ...r,
+        ...input,
+        student_star: service,
+        student_service_star: service,
+        student_attitude_star: attitude,
+        addtime: now,
+      }
     }
     else {
       list.value.push({
         id: nextNumericId(list.value),
         student_id: input.student_id,
         coach_id: input.coach_id,
-        student_star: input.student_star,
+        subject: input.subject ?? '科二',
+        practice_photo: input.practice_photo ?? DEFAULT_PRACTICE_PHOTO,
+        student_star: service,
+        student_service_star: service,
+        student_attitude_star: attitude,
         student_comment: input.student_comment,
         coach_star: 0,
         coach_comment: '',
         student_reply: '',
         coach_reply: '',
+        addtime: now,
       })
     }
     list.value = [...list.value]
   }
 
-  function updateCoachFeedback(id: number, patch: Partial<Pick<DrivingReview, 'coach_star' | 'coach_comment' | 'coach_reply' | 'student_reply'>>) {
+  function updateCoachFeedback(id: number, patch: Partial<Pick<DrivingReview, 'coach_star' | 'coach_progress_star' | 'coach_attitude_star' | 'coach_comment' | 'coach_reply' | 'student_reply'>>) {
     const i = list.value.findIndex(r => r.id === id)
     if (i < 0)
       return false
