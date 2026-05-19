@@ -269,6 +269,8 @@ export interface ContactMessage {
   to_role: RoleType
   to_id: number
   content: string
+  /** 图片消息 URL（上传图片时使用） */
+  image_url?: string
   time: string
   read: 0 | 1
 }

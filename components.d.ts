@@ -9,11 +9,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ActionButton: typeof import('./src/components/ActionButton.vue')['default']
-    BackApplyToolbar: typeof import('./src/components/back/BackApplyToolbar.vue')['default']
     BackCrudModal: typeof import('./src/components/BackCrudModal.vue')['default']
     BackListToolbar: typeof import('./src/components/back/BackListToolbar.vue')['default']
     BackRowActions: typeof import('./src/components/back/BackRowActions.vue')['default']
-    CoachRowActions: typeof import('./src/components/back/CoachRowActions.vue')['default']
     ColorColumn: typeof import('./src/components/ColorColumn.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NCard: typeof import('naive-ui')['NCard']
@@ -44,6 +42,7 @@ declare module 'vue' {
     NResult: typeof import('naive-ui')['NResult']
     NSelect: typeof import('naive-ui')['NSelect']
     NSpace: typeof import('naive-ui')['NSpace']
+    NStatistic: typeof import('naive-ui')['NStatistic']
     NSwitch: typeof import('naive-ui')['NSwitch']
     NTabPane: typeof import('naive-ui')['NTabPane']
     NTabs: typeof import('naive-ui')['NTabs']
